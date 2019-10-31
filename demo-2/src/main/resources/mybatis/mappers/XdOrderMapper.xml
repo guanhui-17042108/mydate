@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dt.xd.dao.mapper.XdOrderMapper">
+  <resultMap id="BaseResultMap" type="com.dt.xd.xdOrder.XdOrder">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="bought_user" jdbcType="VARCHAR" property="boughtUser" />
+    <result column="order_info" jdbcType="VARCHAR" property="orderInfo" />
+    <result column="order_price" jdbcType="REAL" property="orderPrice" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="ts" jdbcType="TIMESTAMP" property="ts" />
+    <result column="pay" jdbcType="VARCHAR" property="pay" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="appraise" jdbcType="VARCHAR" property="appraise" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, order_number, bought_user, order_info, order_price, order_no, ts, pay, status, 
+    appraise
+  </sql>
+  <select id="selectByExample" parameterType="com.dt.xd.xdOrder.XdOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from xd_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from xd_order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from xd_order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dt.xd.xdOrder.XdOrderExample">
+    delete from xd_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dt.xd.xdOrder.XdOrder">
+    insert into xd_order (id, order_number, bought_user, 
+      order_info, order_price, order_no, 
+      ts, pay, status, 
+      appraise)
+    values (#{id,jdbcType=VARCHAR}, #{orderNumber,jdbcType=VARCHAR}, #{boughtUser,jdbcType=VARCHAR}, 
+      #{orderInfo,jdbcType=VARCHAR}, #{orderPrice,jdbcType=REAL}, #{orderNo,jdbcType=VARCHAR}, 
+      #{ts,jdbcType=TIMESTAMP}, #{pay,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{appraise,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dt.xd.xdOrder.XdOrder">
+    insert into xd_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderNumber != null">
+        order_number,
+      </if>
+      <if test="boughtUser != null">
+        bought_user,
+      </if>
+      <if test="orderInfo != null">
+        order_info,
+      </if>
+      <if test="orderPrice != null">
+        order_price,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="ts != null">
+        ts,
+      </if>
+      <if test="pay != null">
+        pay,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="appraise != null">
+        appraise,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNumber != null">
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="boughtUser != null">
+        #{boughtUser,jdbcType=VARCHAR},
+      </if>
+      <if test="orderInfo != null">
+        #{orderInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null">
+        #{orderPrice,jdbcType=REAL},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pay != null">
+        #{pay,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="appraise != null">
+        #{appraise,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dt.xd.xdOrder.XdOrderExample" resultType="java.lang.Long">
+    select count(*) from xd_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update xd_order
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNumber != null">
+        order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.boughtUser != null">
+        bought_user = #{record.boughtUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderInfo != null">
+        order_info = #{record.orderInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderPrice != null">
+        order_price = #{record.orderPrice,jdbcType=REAL},
+      </if>
+      <if test="record.orderNo != null">
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ts != null">
+        ts = #{record.ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.pay != null">
+        pay = #{record.pay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appraise != null">
+        appraise = #{record.appraise,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update xd_order
+    set id = #{record.id,jdbcType=VARCHAR},
+      order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      bought_user = #{record.boughtUser,jdbcType=VARCHAR},
+      order_info = #{record.orderInfo,jdbcType=VARCHAR},
+      order_price = #{record.orderPrice,jdbcType=REAL},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      ts = #{record.ts,jdbcType=TIMESTAMP},
+      pay = #{record.pay,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      appraise = #{record.appraise,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dt.xd.xdOrder.XdOrder">
+    update xd_order
+    <set>
+      <if test="orderNumber != null">
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="boughtUser != null">
+        bought_user = #{boughtUser,jdbcType=VARCHAR},
+      </if>
+      <if test="orderInfo != null">
+        order_info = #{orderInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null">
+        order_price = #{orderPrice,jdbcType=REAL},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="pay != null">
+        pay = #{pay,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="appraise != null">
+        appraise = #{appraise,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dt.xd.xdOrder.XdOrder">
+    update xd_order
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      bought_user = #{boughtUser,jdbcType=VARCHAR},
+      order_info = #{orderInfo,jdbcType=VARCHAR},
+      order_price = #{orderPrice,jdbcType=REAL},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      ts = #{ts,jdbcType=TIMESTAMP},
+      pay = #{pay,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      appraise = #{appraise,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
