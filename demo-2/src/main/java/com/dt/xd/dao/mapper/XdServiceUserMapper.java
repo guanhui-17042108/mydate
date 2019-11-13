@@ -3,8 +3,10 @@ package com.dt.xd.dao.mapper;
 import com.dt.xd.xdServiceUser.XdServiceUser;
 import com.dt.xd.xdServiceUser.XdServiceUserExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface XdServiceUserMapper {
     long countByExample(XdServiceUserExample example);
 

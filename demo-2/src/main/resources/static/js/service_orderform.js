@@ -1,4 +1,5 @@
-$(".user-arrow-down").on("click",function(){
+
+.$(".user-arrow-down").on("click",function(){
     if($(".dropdown").is(":hidden")){
         $(".dropdown").show();
  }else{
@@ -26,3 +27,5 @@ $(".order2").on("click", function(){
 $(".order3").on("click", function(){
     $(".main-top li").eq(3).text("未通过用户");
 })
+
+ 

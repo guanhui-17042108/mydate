@@ -367,19 +367,17 @@
     update xd_service_user
     set service_head = #{serviceHead,jdbcType=VARCHAR},
       service_name = #{serviceName,jdbcType=VARCHAR},
-      area = #{area,jdbcType=VARCHAR},
+      
       service_phone = #{servicePhone,jdbcType=VARCHAR},
-      service_password = #{servicePassword,jdbcType=VARCHAR},
-      introduction = #{introduction,jdbcType=VARCHAR},
-      status = #{status,jdbcType=VARCHAR},
+      
+     
       email = #{email,jdbcType=VARCHAR},
       ts = #{ts,jdbcType=TIMESTAMP},
-      synopsis = #{synopsis,jdbcType=VARCHAR},
-      worktime = #{worktime,jdbcType=VARCHAR},
+      
+     
       qq = #{qq,jdbcType=VARCHAR},
       wechat = #{wechat,jdbcType=VARCHAR},
-      custom_phone = #{customPhone,jdbcType=VARCHAR},
-      license = #{license,jdbcType=VARCHAR}
+      
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>

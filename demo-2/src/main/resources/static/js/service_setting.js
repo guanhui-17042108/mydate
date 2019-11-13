@@ -37,3 +37,26 @@ $(".cancel").on("click", function(event){
     $(".masking").hide();
     console.log("取消");
 })
+ function getUser(id){			
+	 $.ajax({
+           type:"post",
+           url:"/updateQ",
+           data:$('#login_value').serialize(),
+         success:function(data){
+        	 var xdServiceUser=data.xdServiceUser;
+        /*	 var txt="";
+        	 txt+=`<tr><th>学号</th><th>姓名</th><th>密码</th></tr>`;
+        	 txt +=`<tr>
+             	<td><input type="text" name="id" value="${sysUser.id}" /></td>
+             	<td><input type="text" name= "username" value="${sysUser.username}" /></td>
+             	<td><input type="text" name="password" value="${sysUser.password}" /></td>
+             		</tr>`;
+             		txt+=`<tr><td><input type="submit" value="修改" /></td></tr>`;*/
+             	   var tbody=$("<tbody></tbody>").html(txt);
+             	   $('#xdServiceUser').html(tbody);
+         },
+           error:function(data){
+        	   alert("Connection error1111111"+data);
+        	   console.log("失败返回的数据",data);
+        	   }
+           })}

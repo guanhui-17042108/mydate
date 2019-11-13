@@ -35,7 +35,7 @@ $(".login-btn").on("click", function() {
 			console.log("成功后返回数据", data);
 			//alert("code=:"+data.code);
 			if (data.code == 1) {
-				location.href = "operator_product.html"
+				location.href = "/fenyelikeO"
 			} else {
 				alert("信息输入错误!");
 				location.href = "operator_login.html"

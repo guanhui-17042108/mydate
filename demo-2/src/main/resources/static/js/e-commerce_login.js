@@ -31,7 +31,7 @@ $(".login-btn").on("click", function() {
 		success : function(data) {
 			console.log("成功后返回数据", data);
 			if (data.code == 1) {
-				location.href = "/fenyelike"
+				location.href = "/fenyelikeE"
 			} else {
 				alert("信息输入错误!");
 				location.href = "e-commerce_login.html"

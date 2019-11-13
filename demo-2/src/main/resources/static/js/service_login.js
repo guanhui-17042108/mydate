@@ -30,9 +30,8 @@ $(".login-btn").on("click", function() {
 		// 请求成功后调用函数
 		success : function(data) {
 			console.log("成功后返回数据", data);
-			alert("code=:"+data.code);
 			if (data.code == 1) {
-				location.href = "/fenyelikeS"
+				location.href = "/fenyelike"
 			} else {
 				alert("信息输入错误!");
 				location.href = "service_login.html"

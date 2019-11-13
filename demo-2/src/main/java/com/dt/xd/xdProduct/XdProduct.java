@@ -12,8 +12,7 @@ public class XdProduct {
     private String productName;
 
     private String productInstruction;
-
-    private Float productPrice;
+    private String  productPrice;
 
     private String status;
 
@@ -69,11 +68,11 @@ public class XdProduct {
         this.productInstruction = productInstruction == null ? null : productInstruction.trim();
     }
 
-    public Float getProductPrice() {
+    public String getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Float productPrice) {
+    public void setProductPrice(String productPrice) {
         this.productPrice = productPrice;
     }
 

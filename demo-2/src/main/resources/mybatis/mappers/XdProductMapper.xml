@@ -104,7 +104,7 @@
   			<include refid="Example_Where_Clause"></include>
   		</if>
   		<if test="username!=null  and  username!=''">
-  			 where username LIKE CONCAT('%',${username},'%') 
+  			 where username LIKE CONCAT('%',#{username},'%') 
   		</if>
   		<if test="pageStart>=0">
   		  limit ${pageStart},${pageSize}
@@ -124,14 +124,13 @@
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-     <if test="username!=null and username!=''">
-    	where username like concat('%',#{username},'%')  
+    <!-- 如果有分组字段 根据该字段进行分组查询 -->
+    <if test="pageStart>=0">
+    limit ${pageStart},${pageSize}
     </if>
-    <if test="example.pageStart>=0">    
-    	limit #{example.pageStart}, #{example.pageSize}
-    </if>
-    <if test="example.orderByClause != null">
-      order by #{example.orderByClause}
+    <!-- 这个是分页查询要在exa实体类中添加两个字段 offset limit -->
+    <if test="orderByClause != null">
+      order by ${orderByClause}
     </if>
   </select>
   
@@ -153,28 +152,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.dt.xd.xdProduct.XdProduct">
-    insert into xd_product (id, service_product, product_img, 
-      product_name, product_instruction, product_price, 
-      status, ts, sales_volume, 
-      service_name, recommend, high_quality, 
-      username)
-    values (#{id,jdbcType=VARCHAR}, #{serviceProduct,jdbcType=VARCHAR}, #{productImg,jdbcType=VARCHAR}, 
-      #{productName,jdbcType=VARCHAR}, #{productInstruction,jdbcType=VARCHAR}, #{productPrice,jdbcType=REAL}, 
-      #{status,jdbcType=VARCHAR}, #{ts,jdbcType=TIMESTAMP}, #{salesVolume,jdbcType=INTEGER}, 
-      #{serviceName,jdbcType=VARCHAR}, #{recommend,jdbcType=VARCHAR}, #{highQuality,jdbcType=VARCHAR}, 
-      #{username,jdbcType=VARCHAR})
+    insert into xd_product (id, username, product_instruction, product_price )
+    values (#{id,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR}, #{productInstruction,jdbcType=VARCHAR}, #{productPrice,jdbcType=REAL})
   </insert>
   <insert id="insertSelective" parameterType="com.dt.xd.xdProduct.XdProduct">
     insert into xd_product
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
-      </if>
-      <if test="serviceProduct != null">
-        service_product,
-      </if>
-      <if test="productImg != null">
-        product_img,
       </if>
       <if test="productName != null">
         product_name,
@@ -185,37 +170,10 @@
       <if test="productPrice != null">
         product_price,
       </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="ts != null">
-        ts,
-      </if>
-      <if test="salesVolume != null">
-        sales_volume,
-      </if>
-      <if test="serviceName != null">
-        service_name,
-      </if>
-      <if test="recommend != null">
-        recommend,
-      </if>
-      <if test="highQuality != null">
-        high_quality,
-      </if>
-      <if test="username != null">
-        username,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="serviceProduct != null">
-        #{serviceProduct,jdbcType=VARCHAR},
-      </if>
-      <if test="productImg != null">
-        #{productImg,jdbcType=VARCHAR},
       </if>
       <if test="productName != null">
         #{productName,jdbcType=VARCHAR},
@@ -225,27 +183,6 @@
       </if>
       <if test="productPrice != null">
         #{productPrice,jdbcType=REAL},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="ts != null">
-        #{ts,jdbcType=TIMESTAMP},
-      </if>
-      <if test="salesVolume != null">
-        #{salesVolume,jdbcType=INTEGER},
-      </if>
-      <if test="serviceName != null">
-        #{serviceName,jdbcType=VARCHAR},
-      </if>
-      <if test="recommend != null">
-        #{recommend,jdbcType=VARCHAR},
-      </if>
-      <if test="highQuality != null">
-        #{highQuality,jdbcType=VARCHAR},
-      </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

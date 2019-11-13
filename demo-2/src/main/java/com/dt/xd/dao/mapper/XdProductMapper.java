@@ -14,7 +14,7 @@ public interface XdProductMapper {
 
 	List<XdProduct> selectByName(XdProductExample example);
 
-	List<XdProduct> selectByExample(@Param("example") XdProductExample example, @Param("username") String username);
+	List<XdProduct> selectByExample(@Param("example") XdProductExample example,@Param("username") String username);
 
 	int deleteByExample(XdProductExample example);
 
@@ -24,7 +24,7 @@ public interface XdProductMapper {
 
 	int insertSelective(XdProduct record);
 
-	XdProduct selectByPrimaryKey(String id);
+	XdProduct selectByPrimaryKey(Integer id);
 
 	int updateByExampleSelective(@Param("record") XdProduct record, @Param("example") XdProductExample example);
 
