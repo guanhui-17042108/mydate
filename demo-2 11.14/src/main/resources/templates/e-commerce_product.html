@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/e-commerce_product.css">
+    <script src="../js/jquery-3.4.1.min.js" type="text/javascript"></script>
+  
+</script>
+</head>
+
+<body>
+<input type="hidden" th:value="${count}" id="count" />
+	<input type="hidden" th:value="${pageSize}" id="pageSize" />
+	<input type="hidden" th:value="${pageStart}" id="pageStart" />
+    <div class="headder-top">
+        <div class="width1200 headder-top-content">
+            <div><span>{用户名}</span>欢饮来到信达！<span class="user-quit">[退出]</span></div>
+            <ul>
+                <li><a href="e-commerce_shoping-car.html"><i class="fa fa-shopping-cart fa-lg"></i>
+                        购物车<span>1</span>件</a></li>
+                <li> <a href="e-commerce_order.html">
+                        <i class="fa fa-file-text-o fa-lg"></i> 我的订单
+                    </a></li>
+                <li>服务商入口</li>
+            </ul>
+        </div>
+    </div>
+    <div class="logo-search width1200">
+        <img class="logo" src="./images/logo-blue.png" />
+        <ul class="search">
+            <li>
+                <span class="search-product font-aqua">产品</span>丨
+                <span class="search-service">服务商</span>
+            </li>
+            <li>
+                               <input placeholder="搜索您需要的服务或服务商" type="text" th:value="${username}" name="username"  id="username"><span class="search-btn"><i
+                        class="fa fa-search fa-2x"></i></span>
+            </li>
+            <li>
+                热门服务：<span>社保开户</span> <span>公司注册</span>
+            </li>
+        </ul>
+        <img class="tel" src="./images/xinda-tel.png" alt="">
+    </div>
+    <ul class="banner width1200">
+        <li><a href="e-commerce_product.html" class="border-b">全部产品</a></li>
+        <li><a href="#">财税服务</a></li>
+        <li><a href="#">公司工商</a></li>
+        <li><a href="#">人事外包</a></li>
+        <li><a href="#">加盟我们</a></li>
+        <li><a href="#">店铺</a></li>
+    </ul>
+    <div class="line-aqua"></div>
+    <div class="content width1200"  th:if="${count} gt  '0'">
+        <ul class="content-nav">
+            <li class="nav-active">综合排序</li>
+            <li>价格 <i class="fa fa-arrows-v fa-lg"></i></li>
+        </ul>
+        <ul class="content-title">
+            <li>商品</li>
+            <li>价格</li>
+        </ul>
+        <hr color="#ededed" size="1">
+        <div class="article"  th:each="user:${xdProductList}">
+            <img th:src="@{'/headImg?id='+${user.id}}" alt="图片" />
+            <ul class="article-info"   >
+                <li th:text="${user.id}" ></li>
+                <li th:text="${user.username}"></li>
+                <li th:text="${user.productPrice}"></li>
+            </ul>
+            <ul class="article-price">
+                <li th:text="${user.productPrice}"></li>
+                <li>
+                    <a href="e-commerce_settlement.html">立即购买</a>
+                    <span>加入购物车</span>
+                </li>
+            </ul>
+          <hr />
+        </div>
+        <hr color="#ededed" size="1">
+        
+    </div>
+    <table  th:if="${count} gt '0'"
+		th:with="pageNext=${pageStart}+${pageSize},
+		pagePre=${pageStart}-${pageSize},
+		modPage=${count}%${pageSize},
+		pageLast=${count}-${modPage},
+		lastPage=${count}-${pageSize}">
+	
+		<tr class="pagination">
+		
+			<td><a th:href="@{'/fenyelikeE?pageStart=' + 0+'&username='+${username}}">首页</a></td>
+			<td><span th:if="${pagePre} ge '0'" class="main-pagination-page"><a
+					th:href="@{'/fenyelikeE?pageStart=' + ${pagePre}+'&username='+${username}}">«</a></span></td>
+			<td><div id="mydiv"></div></td>
+			<td><span th:if="${pageNext} lt ${count}" ><a
+					th:href="@{'/fenyelikeE?pageStart=' + ${pageNext}+'&username='+${username}}"  >»</a></span></td>
+			<td><span th:if="${modPage} eq  '0'"  ><a
+					th:href="@{'/fenyelikeE?pageStart=' + ${lastPage}+'&username='+${username}}">末页</a></span></td>
+			<td><span th:unless="${modPage} eq  '0'"  ><a
+					th:href="@{'/fenyelikeE?pageStart=' + ${pageLast}+'&username='+${username}}">末页</a></span></td>
+		</tr>
+	</table>
+    <script src="./js/e-commerce_product.js"></script>
+</body>
+
+</html>

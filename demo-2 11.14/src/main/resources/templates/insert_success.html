@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/service_product.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+
+    <script src="../js/jquery-3.4.1.min.js" type="text/javascript"></script>
+    
+</head>
+<body>
+<input type="hidden" th:value="${count}" id="count" />
+	<input type="hidden" th:value="${pageSize}" id="pageSize" />
+	<input type="hidden" th:value="${pageStart}" id="pageStart" />
+
+    <div class="header">
+        <div class="logo_info">
+            <img src="./images/logo.png" alt="logo">
+            <span class="platform_name">信达</span>
+        </div>
+        <ul class="user_info">
+            <li><a href="service_product.html"><i class="fa fa-cog fa-fw"></i>服务管理</a></li>
+            <li><i class="fa fa-shopping-cart fa-fw"></i>新订单(0)</li>
+            <li><i class="fa fa-bell-o fa-fw"></i>通知(0)</li>
+            <li>
+                <img src="./images/default_user.png">
+                <span>用户名字</span>
+                <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
+                <ul class="dropdown">
+                    <li>更改信息</li>
+                    <li>退出登录</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<body>
+添加成功
+</body>
+</html>
