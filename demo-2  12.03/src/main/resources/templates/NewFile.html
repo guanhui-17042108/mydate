@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="/update"> 
+<input name="id" type="hidden"  th:value="${xdProduct.id}"/> 
+    <div class="masking">
+        <div class="scroller">
+            <ul>
+                <li>
+                    <span>图片简介</span>
+                    <button>选择图片</button>
+                </li>
+                <li>
+                    <span>服务名称</span>
+                    <input name="username" placeholder="请输入服务名称" th:value="${xdProduct.username}"/>
+                </li>
+                <li>
+                    <span class="ver-top">服务说明</span>
+                    <textarea name="productInstruction" id="" cols="45" rows="7" th:value="${xdProduct.productInstrution}"></textarea>
+                </li>
+                <li>
+                    <span>服务价格</span>
+                    <input type="number" name="productPrice" th:value="${xdProduct.productPrice}" placeholder="请输入服务价格">
+                </li>
+            </ul>
+            <button class="submit">提交</button>
+            <button class="cancel">取消</button>
+            </div>
+            </div>
+            </form>
+     
+</body>
+</html>
