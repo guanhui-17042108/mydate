@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/public.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/operator_user.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/element-ui_2.12.0.css">
+
+    <script src="../js/jquery-3.4.1.min.js" type="text/javascript"></script>
+</head>
+
+<body>
+<input type="hidden" th:value="${count}" id="count" />
+	<input type="hidden" th:value="${pageSize}" id="pageSize" />
+	<input type="hidden" th:value="${pageStart}" id="pageStart" />
+	
+<script>
+	$(document).ready(function(){
+		var pcount=$('#count').val();
+		var psize=$('#pageSize').val();
+		var pstart=$('#pageStart').val();
+		var id=$('#id').val();
+		var nowpage=Math.floor(pstart/psize)+1;		
+		var cpage=Math.ceil(pcount/psize);
+		var strhtml="";
+		
+		if(cpage<=10){
+			for(var i=1;i<=cpage;i++){
+				if(i==nowpage){
+					strhtml+='<a href=/fenyelikeU?pageStart='+psize*(i-1)+'&id='+id+' style="background-color:#aaaaaa;font-weight:700">'+i+'</a>';
+					//strhtml+='<a href=/userAll?pageStart='+psize*(i-1)+' style="background-color:#aaaaaa"><div class="nowpage">'+i+'</div></a>';
+				}else{
+					strhtml+='<span> <a href=/fenyelikeU?pageStart='+psize*(i-1)+'&id='+id+'>'+i+'</a></span>';
+				}
+			}
+		}
+		else if(cpage>10){
+			
+			if( 1<=nowpage && nowpage<=6){		//pagestart=20 nowpage=11 cpage=15
+			
+				for(var i=1;i<=10;i++){			
+				
+					if(i==nowpage){
+						strhtml+='<a href=/fenyelikeU?pageStart='+psize*(i-1)+'&id='+id+' style="background-color:#aaaaaa;font-weight:700">'+i+'</a>';
+						//strhtml+='<a href=/userAll?pageStart='+psize*(i-1)+' style="background-color:#aaaaaa"><div class="nowpage">'+i+'</div></a>';
+					}else{
+						strhtml+='<span> <a href=/fenyelikeU?pageStart='+psize*(i-1)+'&id='+id+'>'+i+'</a></span>';
+					}
+				}
+			}
+			else if( nowpage<=cpage-4){
+				
+				for(var i=nowpage-5;i<=nowpage+4;i++){//6--15			
+			
+					if(i==nowpage){
+						strhtml+='<a href=/fenyelikeU?pageStart='+psize*(i-1)+'&id='+id+' style="background-color:#aaaaaa;font-weight:700">'+i+'</a>';
+						//strhtml+='<a href=/userAll?pageStart='+psize*(i-1)+' style="background-color:#aaaaaa"><div class="nowpage">'+i+'</div></a>';
+					}else{
+						strhtml+='<span> <a href=/fenyelikeU?pageStart='+psize*(i-1)+'&id='+id+'>'+i+'</a></span>';
+					}
+				
+				}
+			} 
+			else if( cpage-4<nowpage && nowpage<=cpage){
+			
+				for(var i=cpage-9;i<=cpage;i++){
+				
+					if(i==nowpage){
+						strhtml+='<a href=/fenyelikeU?pageStart='+psize*(i-1)+'&id='+id+' style="background-color:#aaaaaa;font-weight:700">'+i+'</a>';
+						//strhtml+='<a href=/userAll?pageStart='+psize*(i-1)+' style="background-color:#aaaaaa"><div class="nowpage">'+i+'</div></a>';
+					}else{
+						strhtml+='<span> <a href=/fenyelikeU?pageStart='+psize*(i-1)+'&id='+id+'>'+i+'</a></span>';
+					}
+				}
+			}
+			else{
+				console.error(00000000);
+			}
+		}
+		else{  console.error(00000000); }
+		$("#mydiv").html(strhtml);
+
+			})();
+	</script>
+	<body>	
+    <div class="header">
+        <div class="logo_info">
+            <img src="./images/logo.png" alt="logo">
+            <span class="platform_name">信达</span>
+        </div>
+        <ul class="user_info">
+            <li><a href="/fenyelikeO"><i class="fa fa-cog fa-fw"></i>服务管理</a></li>
+            <li><i class="fa fa-cube fa-fw"></i>业务管理</li>
+            <li>
+                <img src="./images/default_user.png">
+                <span>用户名字</span>
+                <i class="fa fa-chevron-down fa-fw user-arrow-down"></i>
+                <ul class="dropdown">
+                    <li>更改信息</li>
+                    <li>退出登录</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="main">
+        <ul class="main-nav">
+            <li>
+                <a href="fenyelikeT">
+                    <i class="fa fa-shopping-cart fa-fw"></i>
+                    <p>订单</p>
+                </a>
+            </li>
+            <li class="bg-red">
+                <a href="fenyelikeU">
+                    <i class="fa fa-user fa-fw"></i>
+                    <p>用户</p>
+                </a>
+            </li>
+            <li>
+                <a href="fenyelikeH">
+                    <i class="fa fa-tasks fa-fw"></i>
+                    <p>服务商</p>
+                </a>
+            </li>
+            <li>
+                <a href="fenyelike9">
+                    <i class="fa fa-cny fa-fw"></i>
+                    <p>费用中心</p>
+                </a>
+            </li>
+        </ul>
+        <div class="main-details">
+            <div class="main-top">
+                <ul>
+                    <li>
+                        <i class="fa fa-home fa-fw"></i>
+                    </li>
+                    <li>用户</li>
+                    <li>/</li>
+                    <li>注册用户</li>
+                </ul>
+            </div>
+            <ul class="main-tab">
+                <li class="border-red business-order">注册用户</li>
+                <!-- <li class="service-order">服务商用户</li> -->
+            </ul>
+            <div class="main-content">
+                <div class="search">
+                   <form action="fenyelikeU" method="post">
+                    <input placeholder="用户id查询" name="id" th:if="${xdBoughtUserList}" th:value="${id}" id="id"/><button><i class="fa fa-search fa-fw"></i></button>
+                    </form>
+                </div>
+            </div>
+            <table border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th>用户编号</th>
+                        <th>姓名</th>
+                        <th>手机号</th>
+                        <th>所在地</th>
+                        <th>注册时间</th>
+                        <th>购买订单数</th>
+                        <th>消费金额</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="bought_user:${xdBoughtUserList}">
+                     <td th:text="${bought_user.id}"></td>
+                     <td th:text="${bought_user.userName}"></td>
+                     <td th:text="${bought_user.phone}"></td>
+                     <td th:text="${bought_user.area}"></td>
+                     <td th:text="${bought_user.ts}"></td>
+                     <td th:text="${bought_user.boughtNum}"></td>
+                     <td th:text="${bought_user.total}"></td> 
+                     </tr>
+                </tbody>
+            </table>
+            <table  th:if="${count} gt '0'"
+        		th:with="pageNext=${pageStart}+${pageSize},
+        		pagePre=${pageStart}-${pageSize},
+        		modPage=${count}%${pageSize},
+        		pageLast=${count}-${modPage},
+        		lastPage=${count}-${pageSize}">
+        		
+        		<tr class="pagination">
+        		
+    			<td><a th:href="@{'/fenyelikeU?pageStart=' + 0+'&id='+${id}}">首页 </a></td>
+    			<td><span th:if="${pagePre} ge '0'" class="main-pagination-page"><a
+				        th:href="@{'/fenyelikeU?pageStart=' + ${pagePre}+'&id='+${id}}">上一页</a></span></td>
+				        <td><div id="mydiv"></div></td>
+				        <td><span th:if="${pageNext} lt ${count}" ><a
+						th:href="@{'/fenyelikeU?pageStart=' + ${pageNext}+'&id='+${id}}">下一页 </a></span></td>
+						<td><span th:if="${modPage} eq  '0'"  ><a
+						th:href="@{'/fenyelikeU?pageStart=' + ${lastPage}+'&id='+${id}}">末页 </a></span></td>
+						<td>
+						<td><span th:unless="${modPage} eq  '0'"  ><a
+								th:href="@{'/fenyelikeU?pageStart=' + ${pageLast}+'&id='+${id}}">末页</a></span>
+				</td>
+				</tr>
+				</table>
+            <div class="main-sercive">付费用户...</div>
+        </div>
+    </div>
+    <script src="./js/operator_user.js"></script>
+</body>
+
+</html>
